@@ -6,6 +6,10 @@ other/
 sources/
 experimental/
 releases/
+#ArchAssault
+armv6h/
+armv7h/
+i686/
 
 *0ad*
 *alienarena*
