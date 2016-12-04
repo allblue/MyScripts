@@ -12,7 +12,7 @@ echo "$DIR"
 LST=`du -a ${DIR} | sed 's/^[0-9][0-9\.]*//g' | sed 's/^[ \t][ \t]*//g' > /tmp/lst`
 #LST=`du -h -a ${DIR} | sed 's/^[0-9][0-9\.]*[MGK]//g' | sed 's/^[ \t][ \t]*//g' > /tmp/lst`
 #IFS='\n\n'
-FSUF=("ra" "rm" "rmvb" "asf" "wmv" "dat" "mpeg""MPEG" "mpg" "MPG" "avi" "AVI" "divx" "vod" "mp4" "mov" "MOV" "mkv" "flv" "m4v" "mts" "MTS")
+FSUF=("3gp" "ra" "rm" "rmvb" "asf" "wmv" "dat" "mpeg" "MPEG" "mpg" "MPG" "avi" "AVI" "divx" "vod" "mp4" "MP4" "mov" "MOV" "mkv" "MKV" "flv" "m4v" "mts" "MTS")
 #if [ $1 =='' ]; then
 #  echo Usage: Encode.sh <dir>
 #  exit 1
@@ -27,11 +27,15 @@ for i in $(cat /tmp/lst)
 		do
 			if [[ "$i" =~ .+\."$j"$ ]]; then
 				ffprobe -show_streams -i $i > /tmp/lst2
-				str1=$(grep -i -m1 coded_width /tmp/lst2)
-				str2=$(grep -i -m1 coded_height /tmp/lst2)
+				str1=$(grep -i -m1 ^width /tmp/lst2)
+#				str1=$(grep -i -m1 coded_width /tmp/lst2)
+				str2=$(grep -i -m1 ^height /tmp/lst2)
+#				str2=$(grep -i -m1 coded_height /tmp/lst2)
 				str3=$(grep -i -m1 avg_frame_rate /tmp/lst2)
-				i_w=${str1#coded_width=}
-				i_h=${str2#coded_height=}
+				i_w=${str1#width=}
+#				i_w=${str1#coded_width=}
+				i_h=${str2#height=}
+#				i_h=${str2#coded_height=}
 				i_afr=${str3#avg_frame_rate=}
 				i_fps=$(echo "$i_afr" | bc)
 				echo $i_w
