@@ -57,6 +57,8 @@ for root,dirs,files in os.walk(DST_DIR):
 for v in TMP_FILES_LST:
     j=os.path.splitext(v) 
     print(j)
+    key1=0
+    key2=0
     if j[-1] in INPUT_VIDEO_SUFFIX:
         ffprobe_cmd="ffprobe -v quiet -show_streams -print_format json -show_format -i "+'"'+v+'"'
         print(ffprobe_cmd)
@@ -82,19 +84,25 @@ for v in TMP_FILES_LST:
 
 
         if i_width >= i_height:
-             if i_width < int(o_width_max):
+             if i_width <= int(o_width_max):
                  o_width  = i_width
                  o_height = i_height
              else:
+                 key2=1
                  o_width  = int(o_width_max)
                  o_height = (i_height/i_width)*int(o_width)
         else:
-             if i_height < int(o_width_max):
+             key1=1
+             if i_height <= int(o_width_max):
                  o_width  = i_width
                  o_height = i_height
              else:
+                 key2=1
                  o_height  = int(o_width_max)
                  o_width = (i_width/i_height)*int(o_height)
+
+        print(key1)
+        print(key2)
 
         OUTPUT_VIDEO_PATTERN = "\." + str(o_width) + "p" + OUT_VIDEO_SUFFIX + "$"
         print(OUTPUT_VIDEO_PATTERN)
@@ -112,7 +120,7 @@ for v in TMP_FILES_LST:
                  print("The file will be encoded")
                  print(v)
         #            TMP_ENCODED_LIST.append(i)
-                 if o_width <= int(o_width_max):
+                 if key2==0 :
                      #已采用h264编码，且为mp4格式，重命名
                      if i_codec == "h264" and j[-1] == OUT_VIDEO_SUFFIX:
                          print("Rename Success")
