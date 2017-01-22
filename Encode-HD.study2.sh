@@ -42,10 +42,10 @@ for i in $(cat /tmp/lst)
 					if [[ "${i_vc}" == "${O_VC1}" ]];then
 						if [[ "$j" == "${O_FM}" ]];then
 							mv "$i" "${i%"$j"}${i_w}p.${O_FM}"
-						elif [[ "${i_ac}" == "${O_AC}" ]];then
+						elif [[ "${i_ac}" == "${O_AC1}" ]];then
                                                 	ffmpeg -i "$i" -acodec copy -vcodec copy "${i%"$j"}${i_w}p.${O_FM}"
 						else
-							ffmpeg -i "$i" -acodec "${O_AC}"  -vcodec copy "${i%"$j"}${i_w}p.${O_FM}"
+							ffmpeg -i "$i" -acodec "${O_AC1}"  -vcodec copy "${i%"$j"}${i_w}p.${O_FM}"
 						fi
 					else 
 						HandBrakeCLI -v -i "$i" -o  "${i%"$j"}${i_w}p.${O_FM}" --preset="Normal" -e "${O_VC2}" -E "${O_AC2}" --vfr 
