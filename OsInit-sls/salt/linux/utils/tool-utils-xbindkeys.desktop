@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Name=xbindkeys
+Comment=XBindKeys - associate keys or mouse buttons with shell commands.
+Exec=/usr/bin/xbindkeys
+Terminal=false
+Categories=Utility;

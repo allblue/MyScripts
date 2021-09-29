@@ -1,0 +1,6 @@
+base:
+  "*":
+    - cmd
+    - config
+    - pkg
+

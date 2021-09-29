@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Exec=rclone mount onedrive:  /home/archblue/Documents/onedrive --vfs-cache-max-size 10G --vfs-cache-mode full --buffer-size=64M --log-level INFO --log-file /home/archblue/.config/rclone/rclone.log --dir-cache-time=168h --drive-chunk-size=64M --fast-list --daemon --allow-non-empty
+Hidden=false
+Name[zh_CN]=onedrive挂载
+Name=onedrive挂载
+Comment[zh_CN]=
+Comment=
+X-MATE-Autostart-Delay=0

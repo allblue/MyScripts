@@ -1,0 +1,11 @@
+include:
+  - .backup-etc
+  - .chinese-support
+  - .disk-mount
+  - .grub
+  - .history
+  - .repo-update
+  - .timezone-cn
+  - .user
+  - .vim
+  - .zsh
