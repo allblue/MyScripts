@@ -5,12 +5,12 @@ import re
 import json
 
 DST_DIR="/media/nas/Download/BT"
-DST_DIR="/media/nas/DTA/"
+#DST_DIR="/media/nas/DTA/"
 INPUT_VIDEO_SUFFIX=[".ra",".rm",".rmvb",".asf",".wmv",".dat",".mpeg",".mpg",
                     ".avi",".divx",".vod",".mp4",".mov",".mkv",".flv",".m4v",".mts",".ts"]
 OUT_VIDEO_SUFFIX=".mp4"
 OUTPUT_WIDTH = 870
-EXCLUDE_FILE = "/tmp/exclude_file"
+EXCLUDE_FILE = "/home/archblue/github/MyScripts/python-script/exclude_file"
 DEL_FILE_LIST = []
 
 def GetVideoList(DST_DIR, INPUT_VIDEO_SUFFIX):
@@ -106,7 +106,7 @@ def CompareVideo(VIDEO_FILE, VIDEO_INFO, OUTPUT_WIDTH, OUT_SUFFIX):
             OUT_VIDEO_INFO['isless'] = 0
 
     OUTPUT_VIDEO_PATTERN = "." + str(OUT_VIDEO_INFO['width']) + "p" + OUT_VIDEO_SUFFIX
-    TEST_FILE_PATH = VIDEO_FILE.split(".")[0] + "." + str(OUT_VIDEO_INFO['width']) + "p" + OUT_VIDEO_SUFFIX
+    TEST_FILE_PATH = VIDEO_FILE.strip("."+VIDEO_FILE.split(".")[-1]) + "." + str(OUT_VIDEO_INFO['width']) + "p" + OUT_VIDEO_SUFFIX
     print(OUTPUT_VIDEO_PATTERN)
 
     if re.search(OUTPUT_VIDEO_PATTERN, VIDEO_FILE):
@@ -125,7 +125,7 @@ def CompareVideo(VIDEO_FILE, VIDEO_INFO, OUTPUT_WIDTH, OUT_SUFFIX):
 
 
 def TranscodeVideo(VIDEO_FILE, OUT_VIDEO_INFO, OUTPUT_WIDTH, OUT_VIDEO_SUFFIX):
-    OUT_FILE_PATH = VIDEO_FILE.split(".")[0] + "." + str(OUT_VIDEO_INFO['width']) + "p" + OUT_VIDEO_SUFFIX
+    OUT_FILE_PATH = VIDEO_FILE.strip("."+VIDEO_FILE.split(".")[-1]) + "." + str(OUT_VIDEO_INFO['width']) + "p" + OUT_VIDEO_SUFFIX
 
     if VIDEO_INFO['codec'] == "h264" :
         if OUT_VIDEO_INFO['isless']:
@@ -133,22 +133,22 @@ def TranscodeVideo(VIDEO_FILE, OUT_VIDEO_INFO, OUTPUT_WIDTH, OUT_VIDEO_SUFFIX):
                 print("Rename Success")
                 print(OUT_FILE_PATH)
                 print("")
-   #             os.rename(VIDEO_FILE,OUT_FILE_PATH)
+                os.rename(VIDEO_FILE,OUT_FILE_PATH)
             else:
                 ffmpeg_cmd="ffmpeg -i " + '"' + VIDEO_FILE + '"' + " -vcodec copy -acodec aac  " + '"' + OUT_FILE_PATH + '"'
                 print("CMD:",ffmpeg_cmd)
                 print("")
-  #              os.system(ffmpeg_cmd)
+                os.system(ffmpeg_cmd)
         else:
             handbrake_cmd="HandBrakeCLI -v -i " + '"' + VIDEO_FILE + '"' + " -w " + str(OUT_VIDEO_INFO['width']) + " -l " + str(OUT_VIDEO_INFO['height']) + " -o " + '"' + OUT_FILE_PATH + '"' + " --preset=\"Fast 720p30\" -e x264 -E AAC --vfr"
             print("CMD：", handbrake_cmd)
             print("")
- #           os.system(handbrake_cmd)
+            os.system(handbrake_cmd)
     else:
         handbrake_cmd="HandBrakeCLI -v -i " + '"' + VIDEO_FILE + '"' + " -w " + str(OUT_VIDEO_INFO['width']) + " -l " + str(OUT_VIDEO_INFO['height']) + " -o " + '"' + OUT_FILE_PATH + '"' + " --preset=\"Fast 720p30\" -e x264 -E AAC --vfr"
         print("CMD：",handbrake_cmd)
         print("")
-#        os.system(handbrake_cmd)
+        os.system(handbrake_cmd)
 
 def CleanFiles():
     for each_file in DEL_FILE_LIST:
