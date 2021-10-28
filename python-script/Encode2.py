@@ -4,13 +4,13 @@ import os
 import re
 import json
 
-DST_DIR="/nas/Download/BT"
-#DST_DIR="G:\Download\ff\test"
-INPUT_VIDEO_SUFFIX=[".ra",".rm",".rmvb",".asf",".wmv",".dat",".mpeg",,".mpg",
+DST_DIR="/media/nas/Download/BT"
+DST_DIR="/media/nas/DTA/"
+INPUT_VIDEO_SUFFIX=[".ra",".rm",".rmvb",".asf",".wmv",".dat",".mpeg",".mpg",
                     ".avi",".divx",".vod",".mp4",".mov",".mkv",".flv",".m4v",".mts",".ts"]
 OUT_VIDEO_SUFFIX=".mp4"
 OUTPUT_WIDTH = 870
-EXCLUDE_FILE = "/root/exclude_file"
+EXCLUDE_FILE = "/tmp/exclude_file"
 DEL_FILE_LIST = []
 
 def GetVideoList(DST_DIR, INPUT_VIDEO_SUFFIX):
@@ -140,12 +140,12 @@ def TranscodeVideo(VIDEO_FILE, OUT_VIDEO_INFO, OUTPUT_WIDTH, OUT_VIDEO_SUFFIX):
                 print("")
   #              os.system(ffmpeg_cmd)
         else:
-            handbrake_cmd="HandBrakeCLI -v -i " + '"' + VIDEO_FILE + '"' + " -w " + str(OUT_VIDEO_INFO['width']) + " -l " + str(OUT_VIDEO_INFO['height']) + " -o " + '"' + OUT_FILE_PATH + '"' + " --preset=\"Normal\" -e x264 -E AAC --vfr"
+            handbrake_cmd="HandBrakeCLI -v -i " + '"' + VIDEO_FILE + '"' + " -w " + str(OUT_VIDEO_INFO['width']) + " -l " + str(OUT_VIDEO_INFO['height']) + " -o " + '"' + OUT_FILE_PATH + '"' + " --preset=\"Fast 720p30\" -e x264 -E AAC --vfr"
             print("CMD：", handbrake_cmd)
             print("")
  #           os.system(handbrake_cmd)
     else:
-        handbrake_cmd="HandBrakeCLI -v -i " + '"' + VIDEO_FILE + '"' + " -w " + str(OUT_VIDEO_INFO['width']) + " -l " + str(OUT_VIDEO_INFO['height']) + " -o " + '"' + OUT_FILE_PATH + '"' + " --preset=\"Normal\" -e x264 -E AAC --vfr"
+        handbrake_cmd="HandBrakeCLI -v -i " + '"' + VIDEO_FILE + '"' + " -w " + str(OUT_VIDEO_INFO['width']) + " -l " + str(OUT_VIDEO_INFO['height']) + " -o " + '"' + OUT_FILE_PATH + '"' + " --preset=\"Fast 720p30\" -e x264 -E AAC --vfr"
         print("CMD：",handbrake_cmd)
         print("")
 #        os.system(handbrake_cmd)

@@ -90,6 +90,7 @@ pkg:
     - zy-player-appimage
   office-utils:
     - calibre
+    - code
     - dingtalk-linux
     - drawio-desktop-bin
     - goldendict-qt5-git
@@ -97,7 +98,6 @@ pkg:
     - libreoffice-fresh-zh-cn
     - obsidian
     - rclone
-    - visual-studio-code-bin
     - wps-office-cn
     - wps-office-mime-cn
     - wps-office-mui-zh-cn    

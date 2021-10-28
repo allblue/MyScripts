@@ -3,7 +3,6 @@ Update-repo-conf:
   file.append:
     - name: /etc/pacman.conf
     - text: | 
-       Color
        [multilib]
        Include = /etc/pacman.d/mirrorlist
        [archlocal]
