@@ -106,7 +106,7 @@ def CompareVideo(VIDEO_FILE, VIDEO_INFO, OUTPUT_WIDTH, OUT_SUFFIX):
             OUT_VIDEO_INFO['isless'] = 0
 
     OUTPUT_VIDEO_PATTERN = "." + str(OUT_VIDEO_INFO['width']) + "p" + OUT_VIDEO_SUFFIX
-    TEST_FILE_PATH = VIDEO_FILE.strip("."+VIDEO_FILE.split(".")[-1]) + "." + str(OUT_VIDEO_INFO['width']) + "p" + OUT_VIDEO_SUFFIX
+    TEST_FILE_PATH = VIDEO_FILE.replace('"."+VIDEO_FILE.split(".")[-1]','')  + "." + str(OUT_VIDEO_INFO['width']) + "p" + OUT_VIDEO_SUFFIX
     print(OUTPUT_VIDEO_PATTERN)
 
     if re.search(OUTPUT_VIDEO_PATTERN, VIDEO_FILE):
@@ -125,7 +125,7 @@ def CompareVideo(VIDEO_FILE, VIDEO_INFO, OUTPUT_WIDTH, OUT_SUFFIX):
 
 
 def TranscodeVideo(VIDEO_FILE, OUT_VIDEO_INFO, OUTPUT_WIDTH, OUT_VIDEO_SUFFIX):
-    OUT_FILE_PATH = VIDEO_FILE.strip("."+VIDEO_FILE.split(".")[-1]) + "." + str(OUT_VIDEO_INFO['width']) + "p" + OUT_VIDEO_SUFFIX
+    OUT_FILE_PATH = VIDEO_FILE.replace('"."+VIDEO_FILE.split(".")[-1]','') + "." + str(OUT_VIDEO_INFO['width']) + "p" + OUT_VIDEO_SUFFIX
 
     if VIDEO_INFO['codec'] == "h264" :
         if OUT_VIDEO_INFO['isless']:
